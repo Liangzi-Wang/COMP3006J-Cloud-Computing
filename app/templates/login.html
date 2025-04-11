@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto|Raleway:700');
+        :root {
+            --default-font: 'Roboto';
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--default-font);
+            background: #444;
+        }
+
+        header {
+            width: 100vw;
+            height: 5vh;
+        }
+
+        .box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: #222;
+            transition: color 200ms ease-out;
+        }
+
+        .container {
+            width: 870px;
+            height: 560px;
+            margin: auto;
+            display: flex;
+        }
+
+        .panel,
+        .face,
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .face,
+        .panel {
+            height: 100%;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .card {
+            position: relative;
+            width: 50%;
+            height: 100%;
+            transition: transform 500ms ease-in-out;
+            transform-style: preserve-3d;
+        }
+
+        .card.flip {
+            transform: rotateY(180deg);
+        }
+
+        .face {
+            position: absolute;
+            background: #EEE;
+            text-align: center;
+            backface-visibility: hidden;
+        }
+
+        .card-back {
+            transform: rotatey(180deg);
+        }
+
+        .panel {
+            color: whitesmoke;
+            background: #222;
+            letter-spacing: 0.03em;
+        }
+
+        .panelspan {
+            margin: 5px 25px;
+            font-size: 15px;
+        }
+
+        .panelbtn {
+            margin-top: 20px;
+            background: #222;
+            border: 1px solid whitesmoke;
+        }
+
+        .formspan {
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .forgot {
+            margin: 8px;
+        }
+
+        .formbtn {
+            color: #222;
+        }
+
+        #forgotpassword {
+            font-size: 15px;
+            margin: 8px;
+        }
+
+        input {
+            display: block;
+            margin: 6px;
+            padding: 8px 10px;
+            width: 110%;
+            background: #DDD;
+            border: 1.5px solid #DDD;
+            border-radius: 6px;
+            transition: border 250ms ease-out;
+        }
+
+        input:hover,
+        input:focus {
+            outline: none;
+            border: 1.5px solid black;
+        }
+
+        ::placeholder {
+            letter-spacing: 0.02em;
+            color: rgba(70, 70, 70, 1);
+        }
+
+        button {
+            cursor: pointer;
+            width: 140px;
+            padding: 10px;
+            margin: 5px;
+            color: whitesmoke;
+            background: #DDD;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Raleway';
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            transition: color 200ms ease-out, background 200ms ease-out;
+        }
+
+        button:hover,
+        button:focus {
+            outline: none;
+        }
+
+        button:hover,
+        button:active {
+            background: #222;
+            color: whitesmoke;
+        }
+
+        h2 {
+            font-family: 'Montserrat';
+            font-weight: bold;
+            font-size: 1.7em;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="box">
+        <div class="container">
+            <div class="card left">
+                <div class="face card-front">
+                    <div class="signin-form">
+                        <form action="/login" method="post" novalidate>
+                            <h2>SIGN IN</h2>
+
+                            <input type="text" placeholder="Username" name="username"/>
+                            <input type="password" placeholder="Password" name="password"/>
+                            <button class="formbtn" name="login_submit">SIGN IN</button>
+
+                        </form>
+                        {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                <ul style="color: red;">
+                                  {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+                <div class="face card-back">
+                    <div class="panel">
+                        <h2>WELCOME BACK!</h2>
+                        <span class="panelspan">Please login with your personal credentials</span>
+                        <button class="panelbtn signInBtn">SIGN IN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card right">
+                <div class="face card-front">
+                    <div class="panel">
+                        <h2>NEW HERE?</h2>
+                        <span class="panelspan">Start your journey with us</span>
+                        <button class="panelbtn signUpBtn">SIGN UP</button>
+                    </div>
+                </div>
+                <div class="face card-back">
+                    <div class="signup-form">
+                        <form action="/login" method="post" novalidate>
+                            <h2>CREATE ACCOUNT</h2>
+                            <input type="text" placeholder="Username" name="regis_username" />
+
+                            <input type="password" placeholder="Password" name="regis_password"/>
+                            <button class="formbtn" name="signup_submit">SIGN UP</button>
+                        </form>
+                        {% with messages = get_flashed_messages() %}
+                              {% if messages %}
+                                <ul style="color: red;">
+                                  {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        var left = document.querySelector('.left');
+        var right = document.querySelector('.right');
+        var signUp = document.querySelector('.signUpBtn');
+        var signIn = document.querySelector('.signInBtn');
+        signUp.addEventListener('click', function () {
+            left.classList.add('flip');
+            right.classList.add('flip');
+        });
+        signIn.addEventListener('click', function () {
+            left.classList.remove('flip');
+            right.classList.remove('flip');
+        });
+    </script>
+</body>
+</html>
